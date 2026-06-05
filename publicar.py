@@ -28,7 +28,7 @@ def publicar():
     print("[+] Publicando no GitHub Pages...")
     run(["git", "push", "origin", "main"])
 
-    print(f"\n✓ Publicado em https://blog.ruahanalytics.com")
+    print(f"\n[OK] Publicado em https://blog.ruahanalytics.com")
 
 
 if __name__ == "__main__":
