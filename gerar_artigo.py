@@ -1,4 +1,4 @@
-import anthropic
+from openai import OpenAI
 import os
 import json
 import re
@@ -73,7 +73,7 @@ def proxima_keyword() -> str:
 
 
 def gerar_artigo(keyword: str) -> dict:
-    client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     prompt = f"""Você é um redator especialista em automação de processos e Business Intelligence para empresas brasileiras.
 
@@ -98,17 +98,14 @@ Retorne APENAS um JSON válido com esta estrutura (sem markdown, sem texto fora 
   "conteudo_html": "todo o corpo do artigo em HTML semântico (use <h2>, <h3>, <p>, <ul>, <li>, <strong>, <a href=...>)"
 }}"""
 
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
+    response = client.chat.completions.create(
+        model="gpt-4o",
         max_tokens=4096,
         messages=[{"role": "user", "content": prompt}],
+        response_format={"type": "json_object"},
     )
 
-    raw = message.content[0].text.strip()
-    # Remove possível markdown code block
-    raw = re.sub(r"^```(?:json)?\s*", "", raw)
-    raw = re.sub(r"\s*```$", "", raw)
-
+    raw = response.choices[0].message.content.strip()
     return json.loads(raw)
 
 
@@ -181,7 +178,7 @@ def main():
 
     registrar_artigo(keyword, artigo["titulo"], slug)
     print("[+] Log atualizado")
-    print(f"\n✓ Artigo publicado: artigos/{slug}.html")
+    print(f"\n[OK] Artigo publicado: artigos/{slug}.html")
 
 
 if __name__ == "__main__":

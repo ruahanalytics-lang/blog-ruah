@@ -21,10 +21,10 @@ def run(script: str):
 
 if __name__ == "__main__":
     print("=" * 50)
-    print("PIPELINE BLOG RUAH — iniciando")
+    print("PIPELINE BLOG RUAH - iniciando")
     print("=" * 50)
     run("gerar_artigo.py")
     run("publicar.py")
     print("=" * 50)
-    print("PIPELINE concluído com sucesso")
+    print("PIPELINE concluido com sucesso")
     print("=" * 50)
