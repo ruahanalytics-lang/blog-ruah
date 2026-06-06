@@ -293,58 +293,65 @@
 <!-- PLANOS -->
 <section class="plans" id="planos">
   <div class="container text-center">
-    <p class="section-tag">Planos</p>
-    <h2 class="section-title">Invista menos que um café por semana</h2>
-    <p class="section-sub" style="margin: 0 auto;">Cancele quando quiser. Garantia de 7 dias por lei.</p>
-    <div class="plans-grid">
+    <p class="section-tag">Créditos</p>
+    <h2 class="section-title">Pague só quando precisar.<br>Sem mensalidade.</h2>
+    <p class="section-sub" style="margin: 0 auto;">Compre créditos e use enquanto estiver em busca ativa. Recarregue quando quiser, sem fidelidade.</p>
+    <div class="plans-grid" style="max-width: 880px; margin: 56px auto 0;">
 
-      <!-- BÁSICO -->
+      <!-- R$10 -->
       <div class="plan-card">
-        <div class="plan-name">Básico</div>
-        <div class="plan-price">R$14<span>,90<br>/mês</span></div>
-        <div class="plan-sub">1 perfil de busca monitorado</div>
+        <div class="plan-name">Início</div>
+        <div class="plan-price">R$10<span><br>&nbsp;</span></div>
+        <div class="plan-sub">3 dias de monitoramento</div>
         <ul class="plan-features">
+          <li>Até <strong>10 alertas por dia</strong></li>
+          <li>1 cargo monitorado</li>
           <li>Alertas a cada 10 minutos</li>
-          <li>1 cargo + localização</li>
-          <li>Filtro por tipo de trabalho</li>
-          <li>Alertas pelo WhatsApp</li>
-          <li>Sem precisar de conta LinkedIn</li>
+          <li>Filtro por cidade e tipo de trabalho</li>
+          <li>Alertas no WhatsApp</li>
         </ul>
-        <a href="#cadastro" onclick="selecionarPlano('basico')" class="plan-cta plan-cta-outline">Começar no Básico</a>
+        <a href="#cadastro" onclick="selecionarPlano('creditos_10')" class="plan-cta plan-cta-outline">Começar com R$10</a>
+        <p class="plan-credits-info">~R$3,33 por dia</p>
       </div>
 
-      <!-- PROFISSIONAL -->
+      <!-- R$25 -->
       <div class="plan-card featured">
         <div class="plan-badge">Mais popular</div>
-        <div class="plan-name">Profissional</div>
-        <div class="plan-price">R$24<span>,90<br>/mês</span></div>
-        <div class="plan-sub">3 perfis de busca monitorados</div>
+        <div class="plan-name">Busca Ativa</div>
+        <div class="plan-price">R$25<span><br>&nbsp;</span></div>
+        <div class="plan-sub">10 dias de monitoramento</div>
         <ul class="plan-features">
-          <li>Tudo do Básico</li>
-          <li>Até 3 cargos diferentes</li>
-          <li>Cidades diferentes por cargo</li>
-          <li>Prioridade no suporte</li>
-          <li>Relatório semanal de vagas</li>
+          <li>Até <strong>15 alertas por dia</strong></li>
+          <li>1 cargo monitorado</li>
+          <li>Alertas a cada 10 minutos</li>
+          <li>Filtro por cidade e tipo de trabalho</li>
+          <li>Alertas no WhatsApp</li>
         </ul>
-        <a href="#cadastro" onclick="selecionarPlano('profissional')" class="plan-cta plan-cta-primary">Começar no Profissional</a>
+        <a href="#cadastro" onclick="selecionarPlano('creditos_25')" class="plan-cta plan-cta-primary">Começar com R$25</a>
+        <p class="plan-credits-info">~R$2,50 por dia · economize 25%</p>
       </div>
 
-      <!-- CRÉDITOS -->
+      <!-- R$60 -->
       <div class="plan-card">
-        <div class="plan-name">Créditos</div>
-        <div class="plan-price">R$10<span><br>por recarga</span></div>
-        <div class="plan-sub">Sem mensalidade — pague quando precisar</div>
+        <div class="plan-name">Imersão Total</div>
+        <div class="plan-price">R$60<span><br>&nbsp;</span></div>
+        <div class="plan-sub">30 dias de monitoramento</div>
         <ul class="plan-features">
-          <li>R$10 = 3 dias de monitoramento</li>
-          <li>Máximo de 10 alertas por dia</li>
-          <li>1 perfil de busca ativo</li>
-          <li>Ideal para quem busca por períodos curtos</li>
-          <li>Sem fidelidade</li>
+          <li>Até <strong>25 alertas por dia</strong></li>
+          <li>1 cargo monitorado</li>
+          <li>Alertas a cada 10 minutos</li>
+          <li>Filtro por cidade e tipo de trabalho</li>
+          <li>Alertas no WhatsApp</li>
         </ul>
-        <a href="#cadastro" onclick="selecionarPlano('creditos')" class="plan-cta plan-cta-outline">Comprar Créditos</a>
-        <p class="plan-credits-info">Recarregue a qualquer momento</p>
+        <a href="#cadastro" onclick="selecionarPlano('creditos_60')" class="plan-cta plan-cta-outline">Começar com R$60</a>
+        <p class="plan-credits-info">~R$2,00 por dia · melhor custo-benefício</p>
       </div>
 
+    </div>
+
+    <!-- Comparativo simples -->
+    <div style="margin-top: 40px; background: #fff; border-radius: 12px; padding: 20px 32px; display: inline-block; box-shadow: 0 2px 12px rgba(0,0,0,.07);">
+      <p style="font-size: .85rem; color: #666;">💡 <strong>Sem assinatura, sem cobrança automática.</strong> Você decide quando e quanto usar. Recarregue sempre que precisar.</p>
     </div>
   </div>
 </section>
@@ -396,27 +403,27 @@
             </select>
           </div>
           <div class="form-group full">
-            <label>Plano escolhido *</label>
+            <label>Pacote de créditos *</label>
             <div class="form-plan-options">
               <label class="plan-option">
-                <input type="radio" name="plano" value="basico" />
-                <span class="plan-option-label">
-                  <strong>R$14,90</strong>
-                  Básico · 1 cargo
-                </span>
-              </label>
-              <label class="plan-option">
-                <input type="radio" name="plano" value="profissional" checked />
-                <span class="plan-option-label">
-                  <strong>R$24,90</strong>
-                  Profissional · 3 cargos
-                </span>
-              </label>
-              <label class="plan-option">
-                <input type="radio" name="plano" value="creditos" />
+                <input type="radio" name="plano" value="creditos_10" />
                 <span class="plan-option-label">
                   <strong>R$10</strong>
-                  Créditos · 3 dias
+                  3 dias · 10 alertas/dia
+                </span>
+              </label>
+              <label class="plan-option">
+                <input type="radio" name="plano" value="creditos_25" checked />
+                <span class="plan-option-label">
+                  <strong>R$25</strong>
+                  10 dias · 15 alertas/dia
+                </span>
+              </label>
+              <label class="plan-option">
+                <input type="radio" name="plano" value="creditos_60" />
+                <span class="plan-option-label">
+                  <strong>R$60</strong>
+                  30 dias · 25 alertas/dia
                 </span>
               </label>
             </div>
@@ -451,12 +458,12 @@
         <div class="faq-a">O sistema verifica o LinkedIn a cada 10 a 15 minutos, 24 horas por dia, 7 dias por semana — incluindo fins de semana e feriados.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Posso cancelar quando quiser? <span class="arrow">▾</span></div>
-        <div class="faq-a">Sim! Você pode cancelar a qualquer momento. Além disso, por lei (Art. 49 do Código de Defesa do Consumidor), toda assinatura feita pela internet tem 7 dias de garantia com reembolso total, sem perguntas.</div>
+        <div class="faq-q">Como funciona o sistema de créditos? <span class="arrow">▾</span></div>
+        <div class="faq-a">Você compra um pacote de créditos (R$10, R$25 ou R$60) e o monitoramento fica ativo pelos dias correspondentes. Não há cobrança automática — quando os créditos acabam, o monitoramento pausa e você decide se quer recarregar. Sem surpresas na fatura.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Qual a diferença entre o plano de créditos e a assinatura? <span class="arrow">▾</span></div>
-        <div class="faq-a">A assinatura é ideal para quem está em busca ativa de emprego por um período mais longo. O plano de créditos funciona sem mensalidade — você compra R$10 e tem 3 dias de monitoramento (máx. 10 alertas por dia). Perfeito para quem quer testar ou tem uma busca mais pontual.</div>
+        <div class="faq-q">Tenho garantia se não funcionar? <span class="arrow">▾</span></div>
+        <div class="faq-a">Sim. Por lei (Art. 49 do CDC), compras feitas pela internet têm 7 dias de garantia com reembolso total. Se nos primeiros 7 dias você não receber nenhum alerta relevante, devolvemos 100% do valor — sem burocracia e sem perguntas.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Funciona para qualquer tipo de vaga? <span class="arrow">▾</span></div>
@@ -469,7 +476,7 @@
 <!-- FOOTER -->
 <footer>
   <p>© 2025 <a href="https://ruahanalytics.com" target="_blank">Ruah Analytics</a> · Ruah Monitor</p>
-  <p class="mt-2">Dúvidas? Fale conosco: <a href="mailto:gustavo.pires@qpasso.com.br">gustavo.pires@qpasso.com.br</a></p>
+  <p class="mt-2">Dúvidas? Fale conosco: <a href="mailto:ruahanalytics@gmail.com">ruahanalytics@gmail.com</a></p>
 </footer>
 
 <script>
