@@ -24,6 +24,7 @@ if __name__ == "__main__":
     print("PIPELINE BLOG RUAH - iniciando")
     print("=" * 50)
     run("gerar_artigo.py")
+    run("gerar_sitemap.py")
     run("publicar.py")
     print("=" * 50)
     print("PIPELINE concluido com sucesso")

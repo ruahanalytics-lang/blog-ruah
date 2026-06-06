@@ -37,7 +37,7 @@ KEYWORDS = [
 
 AFILIADOS = {
     "n8n": "https://n8n.io/?via=ruahanalytics",
-    "Make": "https://www.make.com/en/register?pc=ruahanalytics",
+    "Make": "https://www.make.com/en/register?pc=ruahanalyticsmake",
     "Power BI": "https://www.microsoft.com/pt-br/power-platform/products/power-bi",
     "Hostinger": "https://www.hostinger.com.br/",
 }
