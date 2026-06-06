@@ -133,12 +133,11 @@ def atualizar_index(artigo: dict, slug: str):
     data = datetime.now().strftime("%d/%m/%Y")
     card = f"""
     <a href="artigos/{slug}.html" class="card">
-      <div class="card-body">
-        <div class="card-cat">{artigo['categoria']}</div>
-        <h2>{artigo['titulo']}</h2>
-        <p>{artigo['meta_description']}</p>
-        <div class="card-meta">{data}</div>
-      </div>
+      <div class="card-cat">{artigo['categoria']}</div>
+      <h2>{artigo['titulo']}</h2>
+      <p>{artigo['meta_description']}</p>
+      <div class="card-meta">{data}</div>
+      <span class="card-arrow">&#8594;</span>
     </a>"""
 
     index_html = index_html.replace(
