@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruah Monitor — Seja o primeiro a se candidatar</title>
+  <title>Ruah Monitor - LinkedIn — Seja o primeiro a se candidatar</title>
   <meta name="description" content="Monitoramento de vagas no LinkedIn 24/7 com alertas instantâneos no WhatsApp. Candidate-se antes de todo mundo." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -214,7 +214,7 @@
 <header>
   <div class="logo">
     <span class="logo-dot"></span>
-    Ruah Monitor
+    Ruah Monitor - LinkedIn
   </div>
   <a href="#cadastro" class="btn btn-primary">Começar agora</a>
 </header>
@@ -506,9 +506,17 @@
     this.value = v;
   });
 
-  // ── VALIDAÇÃO E ENVIO ──
+  // ── CONFIGURAÇÃO ──
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3baD8h0XqZSB0WBcQJdeEau9JXaEapFy-l2wRUzjJwFORfGve0CIaSs13KMV4hvoj/exec';
 
+  // Payment Links do Stripe — substitua pelos links gerados no painel
+  const STRIPE_LINKS = {
+    'creditos_10': 'https://buy.stripe.com/00w00iblIekgfM6d6T9EI00',
+    'creditos_25': 'https://buy.stripe.com/5kQdR8ahE8ZWgQa7Mz9EI01',
+    'creditos_60': 'https://buy.stripe.com/6oUcN41L84JG9nI3wj9EI02',
+  };
+
+  // ── VALIDAÇÃO E ENVIO ──
   document.getElementById('form-cadastro').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -522,21 +530,28 @@
 
     // Validação
     let ok = true;
-    const show = (id, show) => { document.getElementById(id).style.display = show ? 'block' : 'none'; };
+    const show = (id, visible) => { document.getElementById(id).style.display = visible ? 'block' : 'none'; };
 
-    show('err-nome',     !nome);     if (!nome)     ok = false;
-    show('err-email',    !email || !email.includes('@')); if (!email || !email.includes('@')) ok = false;
-    show('err-whatsapp', whatsapp.length < 10); if (whatsapp.length < 10) ok = false;
-    show('err-keywords', !keywords); if (!keywords) ok = false;
+    show('err-nome',     !nome);                              if (!nome)                          ok = false;
+    show('err-email',    !email || !email.includes('@'));      if (!email || !email.includes('@')) ok = false;
+    show('err-whatsapp', whatsapp.length < 10);               if (whatsapp.length < 10)           ok = false;
+    show('err-keywords', !keywords);                          if (!keywords)                      ok = false;
 
     if (!ok) return;
 
     const btn = document.getElementById('btn-submit');
     btn.disabled = true;
-    btn.textContent = 'Ativando...';
+    btn.textContent = 'Salvando seus dados...';
 
-    const payload = { nome, email, whatsapp: '55' + whatsapp, keywords, location, tipo_trabalho: tipo, plano };
+    const payload = {
+      nome, email,
+      whatsapp: '55' + whatsapp,
+      keywords, location,
+      tipo_trabalho: tipo,
+      plano,
+    };
 
+    // 1. Salva os dados no Sheets como "pendente"
     try {
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
@@ -544,12 +559,16 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      window.location.href = 'obrigado.html';
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = 'Ativar meu monitoramento →';
-      alert('Erro ao enviar. Tente novamente em instantes.');
+    } catch (_) {
+      // no-cors não retorna erro real — continua para o pagamento
     }
+
+    // 2. Redireciona para o Stripe Payment Link do pacote escolhido
+    //    Pré-preenche o e-mail no checkout do Stripe
+    btn.textContent = 'Redirecionando para pagamento...';
+    const stripeBase = STRIPE_LINKS[plano] || STRIPE_LINKS['creditos_25'];
+    const stripeUrl  = stripeBase + '?prefilled_email=' + encodeURIComponent(email);
+    window.location.href = stripeUrl;
   });
 </script>
 </body>
