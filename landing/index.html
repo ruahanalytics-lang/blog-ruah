@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruah Monitor — Seja o primeiro a se candidatar</title>
+  <meta name="description" content="Monitoramento de vagas no LinkedIn 24/7 com alertas instantâneos no WhatsApp. Candidate-se antes de todo mundo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #0A66C2;
+      --blue-d:  #004182;
+      --blue-l:  #EBF3FB;
+      --green:   #057642;
+      --gray-1:  #F3F2EF;
+      --gray-2:  #86888A;
+      --gray-3:  #3D3D3D;
+      --dark:    #0D0D0D;
+      --white:   #FFFFFF;
+      --radius:  12px;
+      --shadow:  0 4px 24px rgba(0,0,0,.09);
+    }
+
+    body { font-family: 'Inter', sans-serif; color: var(--gray-3); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e0e0e0;
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; color: var(--dark); }
+    .logo-dot { width: 10px; height: 10px; background: var(--blue); border-radius: 50%; display: inline-block; }
+    .btn { display: inline-block; padding: 10px 22px; border-radius: 8px; font-weight: 600; font-size: .9rem; cursor: pointer; transition: all .2s; border: none; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-d); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+    .btn-outline:hover { background: var(--blue-l); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0A66C2 0%, #004182 60%, #002B55 100%);
+      color: #fff; text-align: center;
+      padding: 80px 24px 100px;
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 99px; padding: 6px 16px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .05em;
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+    .hero h1 span { color: #5BE0A5; }
+    .hero p { font-size: 1.15rem; opacity: .88; max-width: 560px; margin: 0 auto 36px; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-hero { padding: 14px 32px; font-size: 1rem; border-radius: 10px; font-weight: 700; }
+    .btn-hero-primary { background: #5BE0A5; color: #003E29; }
+    .btn-hero-primary:hover { background: #40d494; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+    .btn-hero-ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.3); }
+    .btn-hero-ghost:hover { background: rgba(255,255,255,.2); }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--dark); color: #fff;
+      padding: 40px 24px;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 48px;
+      text-align: center;
+    }
+    .stat-num { font-size: 2.2rem; font-weight: 800; color: #5BE0A5; }
+    .stat-label { font-size: .85rem; color: #aaa; margin-top: 4px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 24px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-tag { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--blue); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--dark); margin-bottom: 16px; line-height: 1.25; }
+    .section-sub { font-size: 1.05rem; color: var(--gray-2); max-width: 540px; }
+
+    /* ── COMO FUNCIONA ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; margin-top: 56px; }
+    .step { text-align: center; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--blue-l); color: var(--blue); font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .step h3 { font-weight: 700; font-size: 1.05rem; color: var(--dark); margin-bottom: 8px; }
+    .step p { font-size: .92rem; color: var(--gray-2); }
+
+    /* ── PROBLEMA / SOLUÇÃO ── */
+    .problem-box {
+      background: #FFF8F0; border-left: 4px solid #F59E0B;
+      border-radius: var(--radius); padding: 24px 28px; margin-bottom: 32px;
+    }
+    .problem-box h3 { color: #92400E; font-weight: 700; margin-bottom: 8px; }
+    .problem-box p { color: #78350F; font-size: .95rem; }
+    .solution-box {
+      background: #F0FDF4; border-left: 4px solid var(--green);
+      border-radius: var(--radius); padding: 24px 28px;
+    }
+    .solution-box h3 { color: var(--green); font-weight: 700; margin-bottom: 8px; }
+    .solution-box p { color: #14532D; font-size: .95rem; }
+
+    /* ── PLANOS ── */
+    .plans { background: var(--gray-1); }
+    .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 56px; }
+    .plan-card {
+      background: #fff; border-radius: var(--radius); padding: 32px 28px;
+      box-shadow: var(--shadow); position: relative; border: 2px solid transparent;
+      transition: border-color .2s, transform .2s;
+    }
+    .plan-card:hover { border-color: var(--blue); transform: translateY(-4px); }
+    .plan-card.featured { border-color: var(--blue); }
+    .plan-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--blue); color: #fff; font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: 4px 14px; border-radius: 99px;
+    }
+    .plan-name { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-2); margin-bottom: 8px; }
+    .plan-price { font-size: 2.4rem; font-weight: 800; color: var(--dark); line-height: 1; }
+    .plan-price span { font-size: 1rem; font-weight: 500; color: var(--gray-2); }
+    .plan-sub { font-size: .85rem; color: var(--gray-2); margin: 8px 0 24px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .plan-features li { font-size: .92rem; display: flex; gap: 10px; align-items: flex-start; }
+    .plan-features li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .plan-cta { display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: .95rem; cursor: pointer; transition: all .2s; }
+    .plan-cta-primary { background: var(--blue); color: #fff; }
+    .plan-cta-primary:hover { background: var(--blue-d); }
+    .plan-cta-outline { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+    .plan-cta-outline:hover { background: var(--blue-l); }
+    .plan-credits-info { font-size: .8rem; color: var(--gray-2); text-align: center; margin-top: 12px; }
+
+    /* ── FORMULÁRIO ── */
+    .form-section { background: linear-gradient(135deg, #002B55 0%, #0A66C2 100%); color: #fff; }
+    .form-wrapper {
+      background: #fff; border-radius: 16px; padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.2); color: var(--gray-3);
+      max-width: 600px; margin: 48px auto 0;
+    }
+    .form-title { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+    .form-sub { font-size: .9rem; color: var(--gray-2); margin-bottom: 28px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: .82rem; font-weight: 600; color: var(--gray-3); }
+    input, select {
+      padding: 11px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-size: .93rem; font-family: inherit; color: var(--dark);
+      transition: border-color .2s; outline: none; background: #fff;
+    }
+    input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(10,102,194,.1); }
+    .form-plan-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .plan-option { cursor: pointer; }
+    .plan-option input[type=radio] { display: none; }
+    .plan-option-label {
+      display: block; text-align: center; padding: 12px 8px;
+      border: 2px solid #ddd; border-radius: 8px; cursor: pointer;
+      transition: all .2s; font-size: .82rem;
+    }
+    .plan-option-label strong { display: block; font-size: 1rem; color: var(--dark); margin-bottom: 2px; }
+    .plan-option input[type=radio]:checked + .plan-option-label { border-color: var(--blue); background: var(--blue-l); }
+    .btn-submit {
+      width: 100%; padding: 14px; background: var(--blue); color: #fff;
+      border: none; border-radius: 10px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; margin-top: 24px; transition: all .2s; font-family: inherit;
+    }
+    .btn-submit:hover { background: var(--blue-d); transform: translateY(-1px); }
+    .btn-submit:disabled { background: #aaa; cursor: not-allowed; transform: none; }
+    .form-guarantee { text-align: center; font-size: .78rem; color: var(--gray-2); margin-top: 12px; }
+    .form-error { color: #DC2626; font-size: .8rem; display: none; }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; max-width: 700px; }
+    .faq-item { border: 1.5px solid #e5e5e5; border-radius: var(--radius); overflow: hidden; }
+    .faq-q {
+      padding: 18px 24px; font-weight: 600; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      background: #fff; transition: background .2s;
+    }
+    .faq-q:hover { background: var(--gray-1); }
+    .faq-q .arrow { transition: transform .3s; font-size: 1.2rem; color: var(--blue); }
+    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s; font-size: .93rem; color: var(--gray-2); }
+    .faq-item.open .faq-q { background: var(--blue-l); }
+    .faq-item.open .faq-a { max-height: 200px; padding: 16px 24px; }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: #888; text-align: center; padding: 32px 24px; font-size: .85rem; }
+    footer a { color: #aaa; }
+    footer a:hover { color: #fff; }
+
+    /* ── UTILS ── */
+    .text-center { text-align: center; }
+    .mt-2 { margin-top: 8px; }
+    .mt-4 { margin-top: 16px; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-plan-options { grid-template-columns: 1fr; }
+      .form-wrapper { padding: 28px 20px; }
+      .hero { padding: 56px 20px 72px; }
+      .stats { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Ruah Monitor
+  </div>
+  <a href="#cadastro" class="btn btn-primary">Começar agora</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🚀 Monitoramento de Vagas em Tempo Real</div>
+  <h1>Candidate-se antes<br>de todo mundo.<br><span>Seja contratado mais rápido.</span></h1>
+  <p>O Ruah Monitor rastreia vagas no LinkedIn 24/7 e envia um alerta no seu WhatsApp segundos após a publicação — para você ser um dos primeiros 25 candidatos.</p>
+  <div class="hero-cta">
+    <a href="#cadastro" class="btn btn-hero btn-hero-primary">Quero ser o primeiro →</a>
+    <a href="#como-funciona" class="btn btn-hero btn-hero-ghost">Como funciona?</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div>
+    <div class="stat-num">3×</div>
+    <div class="stat-label">mais chances de contratação<br>entre os Top 25 candidatos</div>
+  </div>
+  <div>
+    <div class="stat-num">&lt;10min</div>
+    <div class="stat-label">tempo médio para detectar<br>uma vaga nova</div>
+  </div>
+  <div>
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">monitoramento contínuo<br>sem precisar de conta LinkedIn</div>
+  </div>
+</div>
+
+<!-- PROBLEMA / SOLUÇÃO -->
+<section>
+  <div class="container">
+    <p class="section-tag">O problema</p>
+    <h2 class="section-title">Por que você perde vagas sem perceber?</h2>
+    <div style="max-width: 680px; margin-top: 32px;">
+      <div class="problem-box">
+        <h3>⏰ Timing é tudo no recrutamento</h3>
+        <p>Uma vaga publicada às 9h da manhã já pode ter 200+ candidatos até o meio-dia. Recrutadores costumam analisar apenas os primeiros 25 a 50 currículos. Se você viu a vaga no dia seguinte, provavelmente chegou tarde demais.</p>
+      </div>
+      <div class="solution-box" style="margin-top: 16px;">
+        <h3>✅ Ruah Monitor resolve isso automaticamente</h3>
+        <p>Nosso bot verifica o LinkedIn a cada 10 minutos. Assim que uma vaga nova aparece dentro do seu perfil de busca, você recebe um alerta no WhatsApp — antes de 99% dos candidatos abrirem o LinkedIn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona" style="background: var(--gray-1);">
+  <div class="container text-center">
+    <p class="section-tag">Como funciona</p>
+    <h2 class="section-title">Simples. Automático. Eficaz.</h2>
+    <p class="section-sub" style="margin: 0 auto;">Sem instalar apps, sem dar senha do LinkedIn. Você configura uma vez e recebe alertas para sempre.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Você diz o que busca</h3>
+        <p>Informe o cargo, cidade e tipo de trabalho (remoto, presencial ou híbrido). Sem cadastro no LinkedIn necessário.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Monitoramos 24/7</h3>
+        <p>Nosso sistema verifica o LinkedIn a cada 10 minutos, filtrando exatamente pelo seu perfil de busca.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Alerta no WhatsApp</h3>
+        <p>Nova vaga detectada? Você recebe o alerta instantâneo com título, empresa e link direto para se candidatar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="plans" id="planos">
+  <div class="container text-center">
+    <p class="section-tag">Planos</p>
+    <h2 class="section-title">Invista menos que um café por semana</h2>
+    <p class="section-sub" style="margin: 0 auto;">Cancele quando quiser. Garantia de 7 dias por lei.</p>
+    <div class="plans-grid">
+
+      <!-- BÁSICO -->
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price">R$14<span>,90<br>/mês</span></div>
+        <div class="plan-sub">1 perfil de busca monitorado</div>
+        <ul class="plan-features">
+          <li>Alertas a cada 10 minutos</li>
+          <li>1 cargo + localização</li>
+          <li>Filtro por tipo de trabalho</li>
+          <li>Alertas pelo WhatsApp</li>
+          <li>Sem precisar de conta LinkedIn</li>
+        </ul>
+        <a href="#cadastro" onclick="selecionarPlano('basico')" class="plan-cta plan-cta-outline">Começar no Básico</a>
+      </div>
+
+      <!-- PROFISSIONAL -->
+      <div class="plan-card featured">
+        <div class="plan-badge">Mais popular</div>
+        <div class="plan-name">Profissional</div>
+        <div class="plan-price">R$24<span>,90<br>/mês</span></div>
+        <div class="plan-sub">3 perfis de busca monitorados</div>
+        <ul class="plan-features">
+          <li>Tudo do Básico</li>
+          <li>Até 3 cargos diferentes</li>
+          <li>Cidades diferentes por cargo</li>
+          <li>Prioridade no suporte</li>
+          <li>Relatório semanal de vagas</li>
+        </ul>
+        <a href="#cadastro" onclick="selecionarPlano('profissional')" class="plan-cta plan-cta-primary">Começar no Profissional</a>
+      </div>
+
+      <!-- CRÉDITOS -->
+      <div class="plan-card">
+        <div class="plan-name">Créditos</div>
+        <div class="plan-price">R$10<span><br>por recarga</span></div>
+        <div class="plan-sub">Sem mensalidade — pague quando precisar</div>
+        <ul class="plan-features">
+          <li>R$10 = 3 dias de monitoramento</li>
+          <li>Máximo de 10 alertas por dia</li>
+          <li>1 perfil de busca ativo</li>
+          <li>Ideal para quem busca por períodos curtos</li>
+          <li>Sem fidelidade</li>
+        </ul>
+        <a href="#cadastro" onclick="selecionarPlano('creditos')" class="plan-cta plan-cta-outline">Comprar Créditos</a>
+        <p class="plan-credits-info">Recarregue a qualquer momento</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="form-section" id="cadastro">
+  <div class="container text-center">
+    <p class="section-tag" style="color: #5BE0A5;">Começar agora</p>
+    <h2 class="section-title" style="color: #fff;">Configure seu monitoramento</h2>
+    <p style="color: rgba(255,255,255,.8); font-size: 1rem;">Preencha abaixo e receba as primeiras vagas no WhatsApp em minutos.</p>
+
+    <div class="form-wrapper">
+      <div class="form-title">Seus dados de acesso</div>
+      <div class="form-sub">Usamos apenas para enviar seus alertas. Nenhum dado é compartilhado.</div>
+
+      <form id="form-cadastro" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome">Nome completo *</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+            <span class="form-error" id="err-nome">Informe seu nome.</span>
+          </div>
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp *</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(19) 99999-9999" required />
+            <span class="form-error" id="err-whatsapp">Informe um número válido.</span>
+          </div>
+          <div class="form-group full">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+            <span class="form-error" id="err-email">Informe um e-mail válido.</span>
+          </div>
+          <div class="form-group full">
+            <label for="keywords">Cargo que você busca *</label>
+            <input type="text" id="keywords" name="keywords" placeholder="Ex: Analista de Dados, Gerente de Projetos, Dev Backend..." required />
+            <span class="form-error" id="err-keywords">Informe o cargo desejado.</span>
+          </div>
+          <div class="form-group">
+            <label for="location">Cidade / Estado</label>
+            <input type="text" id="location" name="location" placeholder="Ex: São Paulo, Campinas..." />
+          </div>
+          <div class="form-group">
+            <label for="tipo_trabalho">Tipo de trabalho</label>
+            <select id="tipo_trabalho" name="tipo_trabalho">
+              <option value="todos">Qualquer tipo</option>
+              <option value="remoto">Remoto</option>
+              <option value="hibrido">Híbrido</option>
+              <option value="presencial">Presencial</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Plano escolhido *</label>
+            <div class="form-plan-options">
+              <label class="plan-option">
+                <input type="radio" name="plano" value="basico" />
+                <span class="plan-option-label">
+                  <strong>R$14,90</strong>
+                  Básico · 1 cargo
+                </span>
+              </label>
+              <label class="plan-option">
+                <input type="radio" name="plano" value="profissional" checked />
+                <span class="plan-option-label">
+                  <strong>R$24,90</strong>
+                  Profissional · 3 cargos
+                </span>
+              </label>
+              <label class="plan-option">
+                <input type="radio" name="plano" value="creditos" />
+                <span class="plan-option-label">
+                  <strong>R$10</strong>
+                  Créditos · 3 dias
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-submit">
+          Ativar meu monitoramento →
+        </button>
+        <p class="form-guarantee">🔒 Seus dados estão seguros · 7 dias de garantia · Cancele quando quiser</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-tag">Dúvidas frequentes</p>
+    <h2 class="section-title">Perguntas e respostas</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Preciso dar minha senha do LinkedIn? <span class="arrow">▾</span></div>
+        <div class="faq-a">Não! O Ruah Monitor acessa apenas a área pública de vagas do LinkedIn, sem nenhum tipo de login ou conta. Seus dados no LinkedIn estão 100% seguros.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Como recebo os alertas? <span class="arrow">▾</span></div>
+        <div class="faq-a">Os alertas chegam direto no seu WhatsApp com o título da vaga, nome da empresa, localização e o link para se candidatar com um clique.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Com que frequência as vagas são verificadas? <span class="arrow">▾</span></div>
+        <div class="faq-a">O sistema verifica o LinkedIn a cada 10 a 15 minutos, 24 horas por dia, 7 dias por semana — incluindo fins de semana e feriados.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso cancelar quando quiser? <span class="arrow">▾</span></div>
+        <div class="faq-a">Sim! Você pode cancelar a qualquer momento. Além disso, por lei (Art. 49 do Código de Defesa do Consumidor), toda assinatura feita pela internet tem 7 dias de garantia com reembolso total, sem perguntas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qual a diferença entre o plano de créditos e a assinatura? <span class="arrow">▾</span></div>
+        <div class="faq-a">A assinatura é ideal para quem está em busca ativa de emprego por um período mais longo. O plano de créditos funciona sem mensalidade — você compra R$10 e tem 3 dias de monitoramento (máx. 10 alertas por dia). Perfeito para quem quer testar ou tem uma busca mais pontual.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Funciona para qualquer tipo de vaga? <span class="arrow">▾</span></div>
+        <div class="faq-a">Funciona para qualquer cargo que apareça na busca pública do LinkedIn — desde vagas de tecnologia, marketing, gestão, logística, até cargos jurídicos e de saúde. Você define o cargo e a localização.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <a href="https://ruahanalytics.com" target="_blank">Ruah Analytics</a> · Ruah Monitor</p>
+  <p class="mt-2">Dúvidas? Fale conosco: <a href="mailto:gustavo.pires@qpasso.com.br">gustavo.pires@qpasso.com.br</a></p>
+</footer>
+
+<script>
+  // ── SELECIONAR PLANO PELO BOTÃO DOS CARDS ──
+  function selecionarPlano(plano) {
+    const radio = document.querySelector(`input[name="plano"][value="${plano}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  // ── FAQ ACCORDION ──
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── FORMATAR WHATSAPP ──
+  document.getElementById('whatsapp').addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length <= 11) {
+      v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+      v = v.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+    }
+    this.value = v;
+  });
+
+  // ── VALIDAÇÃO E ENVIO ──
+  const APPS_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+
+  document.getElementById('form-cadastro').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const nome     = document.getElementById('nome').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.replace(/\D/g, '');
+    const keywords = document.getElementById('keywords').value.trim();
+    const location = document.getElementById('location').value.trim();
+    const tipo     = document.getElementById('tipo_trabalho').value;
+    const plano    = document.querySelector('input[name="plano"]:checked')?.value;
+
+    // Validação
+    let ok = true;
+    const show = (id, show) => { document.getElementById(id).style.display = show ? 'block' : 'none'; };
+
+    show('err-nome',     !nome);     if (!nome)     ok = false;
+    show('err-email',    !email || !email.includes('@')); if (!email || !email.includes('@')) ok = false;
+    show('err-whatsapp', whatsapp.length < 10); if (whatsapp.length < 10) ok = false;
+    show('err-keywords', !keywords); if (!keywords) ok = false;
+
+    if (!ok) return;
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Ativando...';
+
+    const payload = { nome, email, whatsapp: '55' + whatsapp, keywords, location, tipo_trabalho: tipo, plano };
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      window.location.href = 'obrigado.html';
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Ativar meu monitoramento →';
+      alert('Erro ao enviar. Tente novamente em instantes.');
+    }
+  });
+</script>
+</body>
+</html>

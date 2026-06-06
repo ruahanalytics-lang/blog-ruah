@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro confirmado — Ruah Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #002B55 0%, #0A66C2 100%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #fff; border-radius: 20px; padding: 56px 48px;
+      max-width: 520px; width: 100%; text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,.25);
+    }
+    .icon { font-size: 4rem; margin-bottom: 24px; }
+    h1 { font-size: 1.8rem; font-weight: 800; color: #0D0D0D; margin-bottom: 12px; }
+    .sub { font-size: 1rem; color: #666; line-height: 1.6; margin-bottom: 32px; }
+    .highlight { background: #EBF3FB; border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; text-align: left; }
+    .highlight p { font-size: .9rem; color: #004182; margin-bottom: 6px; }
+    .highlight p:last-child { margin-bottom: 0; }
+    .highlight strong { color: #0A66C2; }
+    .steps-list { text-align: left; margin-bottom: 32px; display: flex; flex-direction: column; gap: 14px; }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; }
+    .step-circle { width: 28px; height: 28px; border-radius: 50%; background: #0A66C2; color: #fff; font-weight: 700; font-size: .8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-text strong { display: block; font-size: .9rem; color: #0D0D0D; }
+    .step-text span { font-size: .82rem; color: #666; }
+    .btn-voltar { display: inline-block; padding: 12px 28px; background: #0A66C2; color: #fff; border-radius: 8px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: background .2s; }
+    .btn-voltar:hover { background: #004182; }
+    .footer-note { font-size: .78rem; color: #aaa; margin-top: 20px; }
+
+    @media (max-width: 480px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✅</div>
+    <h1>Cadastro confirmado!</h1>
+    <p class="sub">Seu monitoramento foi ativado. Fique de olho no seu WhatsApp — os alertas começam a chegar nas próximas horas.</p>
+
+    <div class="highlight">
+      <p>📌 <strong>O que acontece agora:</strong></p>
+      <p>Nosso sistema já começou a monitorar as vagas com o seu perfil. Assim que detectar algo relevante, você recebe um alerta direto no WhatsApp.</p>
+    </div>
+
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-circle">1</div>
+        <div class="step-text">
+          <strong>Aguarde o primeiro alerta</strong>
+          <span>Pode levar até 15 minutos para a primeira varredura completar.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">2</div>
+        <div class="step-text">
+          <strong>Candidate-se imediatamente</strong>
+          <span>Ao receber o alerta, clique no link e candidate-se antes dos outros.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">3</div>
+        <div class="step-text">
+          <strong>Seja um dos Top 25</strong>
+          <span>Candidatos nas primeiras posições têm 3× mais chance de entrevista.</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn-voltar">← Voltar à página inicial</a>
+    <p class="footer-note">Dúvidas? Responda qualquer mensagem no WhatsApp ou envie um e-mail para gustavo.pires@qpasso.com.br</p>
+  </div>
+</body>
+</html>
