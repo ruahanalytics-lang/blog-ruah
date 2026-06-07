@@ -173,6 +173,7 @@
     .btn-submit:disabled { background: #aaa; cursor: not-allowed; transform: none; }
     .form-guarantee { text-align: center; font-size: .78rem; color: var(--gray-2); margin-top: 12px; }
     .form-error { color: #DC2626; font-size: .8rem; display: none; }
+    .form-hint { display: block; font-size: .78rem; color: var(--gray-2); margin-top: 5px; line-height: 1.4; }
 
     /* ── FAQ ── */
     .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; max-width: 700px; }
@@ -386,19 +387,21 @@
             <span class="form-error" id="err-email">Informe um e-mail válido.</span>
           </div>
           <div class="form-group full">
-            <label for="keywords">Cargo que você busca *</label>
-            <input type="text" id="keywords" name="keywords" placeholder="Ex: Analista de Dados, Gerente de Projetos, Dev Backend..." required />
-            <span class="form-error" id="err-keywords">Informe o cargo desejado.</span>
+            <label for="keywords">Palavras-chave do cargo *</label>
+            <input type="text" id="keywords" name="keywords" placeholder="Ex: analista dados, engenheiro dados, analista qualidade" required />
+            <span class="form-error" id="err-keywords">Informe pelo menos uma palavra-chave.</span>
+            <span class="form-hint">Use palavras-chave separadas por vírgula — não precisa escrever o cargo completo. Ex: <em>"analista dados, scientist"</em> monitora os dois ao mesmo tempo.</span>
           </div>
           <div class="form-group">
             <label for="location">Cidade / Estado</label>
             <input type="text" id="location" name="location" placeholder="Ex: São Paulo, Campinas..." />
+            <span class="form-hint">Deixe em branco ou selecione Remoto para buscar em todo o Brasil.</span>
           </div>
           <div class="form-group">
             <label for="tipo_trabalho">Tipo de trabalho</label>
             <select id="tipo_trabalho" name="tipo_trabalho">
               <option value="todos">Qualquer tipo</option>
-              <option value="remoto">Remoto</option>
+              <option value="remoto">Remoto (busca em todo o Brasil)</option>
               <option value="hibrido">Híbrido</option>
               <option value="presencial">Presencial</option>
             </select>
