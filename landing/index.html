@@ -175,6 +175,20 @@
     .form-error { color: #DC2626; font-size: .8rem; display: none; }
     .form-hint { display: block; font-size: .78rem; color: var(--gray-2); margin-top: 5px; line-height: 1.4; }
 
+    /* ── CHIPS DE CARGO ── */
+    .cargo-section { margin-bottom: 10px; }
+    .cargo-section-label { font-size: .72rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; display: block; }
+    .cargo-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cargo-chip { display: inline-flex; align-items: center; padding: 6px 12px; border: 1.5px solid #ddd; border-radius: 20px; font-size: .82rem; cursor: pointer; transition: all .2s; background: #fff; color: var(--gray-3); user-select: none; }
+    .cargo-chip:hover { border-color: var(--blue); color: var(--blue); }
+    .cargo-chip.selected { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+    .cargo-chip.disabled { opacity: .4; cursor: not-allowed; }
+    .cargo-chip.disabled:hover { border-color: #ddd; color: var(--gray-3); }
+    .cargo-counter { font-size: .78rem; color: var(--gray-2); margin-top: 8px; }
+    .cargo-counter span { font-weight: 700; color: var(--blue); }
+    #outro-input-wrap { display: none; margin-top: 8px; }
+    .cargo-chips-box { border: 1.5px solid #ddd; border-radius: 10px; padding: 16px; background: #fafafa; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+
     /* ── FAQ ── */
     .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; max-width: 700px; }
     .faq-item { border: 1.5px solid #e5e5e5; border-radius: var(--radius); overflow: hidden; }
@@ -387,10 +401,137 @@
             <span class="form-error" id="err-email">Informe um e-mail válido.</span>
           </div>
           <div class="form-group full">
-            <label for="keywords">Palavras-chave do cargo *</label>
-            <input type="text" id="keywords" name="keywords" placeholder="Ex: analista dados, engenheiro dados, analista qualidade" required />
-            <span class="form-error" id="err-keywords">Informe pelo menos uma palavra-chave.</span>
-            <span class="form-hint">Use palavras-chave separadas por vírgula — não precisa escrever o cargo completo. Ex: <em>"analista dados, scientist"</em> monitora os dois ao mesmo tempo.</span>
+            <label>Cargo(s) que você busca * <em style="font-weight:400;color:var(--gray-2)">(escolha até 3)</em></label>
+            <div class="cargo-chips-box" id="cargo-chips-box">
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Tecnologia</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista de Dados">Analista de Dados</span>
+                  <span class="cargo-chip" data-value="Engenheiro de Dados">Engenheiro de Dados</span>
+                  <span class="cargo-chip" data-value="Cientista de Dados">Cientista de Dados</span>
+                  <span class="cargo-chip" data-value="Analista de BI">Analista de BI</span>
+                  <span class="cargo-chip" data-value="Desenvolvedor Backend">Dev Backend</span>
+                  <span class="cargo-chip" data-value="Desenvolvedor Frontend">Dev Frontend</span>
+                  <span class="cargo-chip" data-value="Desenvolvedor Full Stack">Dev Full Stack</span>
+                  <span class="cargo-chip" data-value="DevOps">DevOps / SRE</span>
+                  <span class="cargo-chip" data-value="Analista de Sistemas">Analista de Sistemas</span>
+                  <span class="cargo-chip" data-value="UX Designer">UX Designer</span>
+                  <span class="cargo-chip" data-value="Product Manager">Product Manager</span>
+                  <span class="cargo-chip" data-value="Analista de Suporte TI">Suporte TI</span>
+                  <span class="cargo-chip" data-value="Analista de Segurança da Informação">Segurança da Informação</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Marketing &amp; Comunicação</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista de Marketing">Analista de Marketing</span>
+                  <span class="cargo-chip" data-value="Social Media">Social Media</span>
+                  <span class="cargo-chip" data-value="Designer Gráfico">Designer Gráfico</span>
+                  <span class="cargo-chip" data-value="Redator">Redator / Copywriter</span>
+                  <span class="cargo-chip" data-value="Analista de SEO">Analista de SEO</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Negócios &amp; Administração</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista Administrativo">Analista Administrativo</span>
+                  <span class="cargo-chip" data-value="Assistente Administrativo">Assistente Administrativo</span>
+                  <span class="cargo-chip" data-value="Gerente de Projetos">Gerente de Projetos</span>
+                  <span class="cargo-chip" data-value="Analista de Processos">Analista de Processos</span>
+                  <span class="cargo-chip" data-value="Coordenador de Operações">Coordenador de Operações</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Financeiro &amp; Contábil</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista Financeiro">Analista Financeiro</span>
+                  <span class="cargo-chip" data-value="Analista Contábil">Analista Contábil</span>
+                  <span class="cargo-chip" data-value="Assistente Financeiro">Assistente Financeiro</span>
+                  <span class="cargo-chip" data-value="Analista de Controladoria">Analista de Controladoria</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Comercial &amp; Vendas</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista de Vendas">Analista de Vendas</span>
+                  <span class="cargo-chip" data-value="SDR">SDR / Pré-Vendas</span>
+                  <span class="cargo-chip" data-value="Executivo de Contas">Executivo de Contas</span>
+                  <span class="cargo-chip" data-value="Gerente Comercial">Gerente Comercial</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">RH &amp; Pessoas</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista de RH">Analista de RH</span>
+                  <span class="cargo-chip" data-value="Recrutador">Recrutador</span>
+                  <span class="cargo-chip" data-value="Business Partner RH">Business Partner RH</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Jurídico</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Advogado">Advogado</span>
+                  <span class="cargo-chip" data-value="Analista Jurídico">Analista Jurídico</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Logística &amp; Supply Chain</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Analista de Logística">Analista de Logística</span>
+                  <span class="cargo-chip" data-value="Analista de Supply Chain">Analista de Supply Chain</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Engenharia</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Engenheiro Civil">Engenheiro Civil</span>
+                  <span class="cargo-chip" data-value="Engenheiro de Produção">Engenheiro de Produção</span>
+                  <span class="cargo-chip" data-value="Engenheiro Mecânico">Engenheiro Mecânico</span>
+                  <span class="cargo-chip" data-value="Engenheiro Elétrico">Engenheiro Elétrico</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Saúde</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Enfermeiro">Enfermeiro</span>
+                  <span class="cargo-chip" data-value="Fisioterapeuta">Fisioterapeuta</span>
+                  <span class="cargo-chip" data-value="Psicólogo">Psicólogo</span>
+                  <span class="cargo-chip" data-value="Farmacêutico">Farmacêutico</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Educação</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" data-value="Professor">Professor</span>
+                  <span class="cargo-chip" data-value="Coordenador Pedagógico">Coordenador Pedagógico</span>
+                </div>
+              </div>
+
+              <div class="cargo-section">
+                <span class="cargo-section-label">Outro cargo</span>
+                <div class="cargo-chips">
+                  <span class="cargo-chip" id="chip-outro" data-value="__outro__">+ Digitar cargo</span>
+                </div>
+                <div id="outro-input-wrap">
+                  <input type="text" id="outro-input" placeholder="Ex: Nutricionista, Piloto, Arquiteto..." style="margin-top:6px;" />
+                </div>
+              </div>
+
+            </div>
+            <p class="cargo-counter">Selecionados: <span id="cargo-count">0</span> / 3</p>
+            <span class="form-error" id="err-keywords">Selecione pelo menos 1 cargo.</span>
+            <input type="hidden" id="keywords" name="keywords" />
           </div>
           <div class="form-group">
             <label for="location">Cidade / Estado</label>
@@ -484,6 +625,58 @@
 </footer>
 
 <script>
+  // ── CHIPS DE CARGO ──
+  (function () {
+    const MAX = 3;
+    const hiddenInput = document.getElementById('keywords');
+    const countEl     = document.getElementById('cargo-count');
+    const outroChip   = document.getElementById('chip-outro');
+    const outroWrap   = document.getElementById('outro-input-wrap');
+    const outroInput  = document.getElementById('outro-input');
+
+    function getSelected() {
+      const chips = Array.from(document.querySelectorAll('.cargo-chip.selected:not(#chip-outro)'))
+        .map(c => c.dataset.value);
+      const custom = outroChip.classList.contains('selected') ? outroInput.value.trim() : '';
+      return custom ? [...chips, custom] : chips;
+    }
+
+    function sync() {
+      const sel = getSelected();
+      hiddenInput.value  = sel.join(', ');
+      countEl.textContent = sel.length;
+      // desabilita chips não selecionados quando limite atingido
+      document.querySelectorAll('.cargo-chip').forEach(c => {
+        if (c.classList.contains('selected')) { c.classList.remove('disabled'); return; }
+        if (sel.length >= MAX) c.classList.add('disabled');
+        else c.classList.remove('disabled');
+      });
+    }
+
+    document.querySelectorAll('.cargo-chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        if (this.classList.contains('disabled')) return;
+
+        if (this.id === 'chip-outro') {
+          if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            outroWrap.style.display = 'none';
+            outroInput.value = '';
+          } else {
+            this.classList.add('selected');
+            outroWrap.style.display = 'block';
+            outroInput.focus();
+          }
+        } else {
+          this.classList.toggle('selected');
+        }
+        sync();
+      });
+    });
+
+    outroInput.addEventListener('input', sync);
+  })();
+
   // ── SELECIONAR PLANO PELO BOTÃO DOS CARDS ──
   function selecionarPlano(plano) {
     const radio = document.querySelector(`input[name="plano"][value="${plano}"]`);
