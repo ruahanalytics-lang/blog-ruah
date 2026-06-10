@@ -174,6 +174,12 @@
     .form-guarantee { text-align: center; font-size: .78rem; color: var(--gray-2); margin-top: 12px; }
     .form-error { color: #DC2626; font-size: .8rem; display: none; }
     .form-hint { display: block; font-size: .78rem; color: var(--gray-2); margin-top: 5px; line-height: 1.4; }
+    .tipo-checkboxes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+    .tipo-option { display: flex; align-items: center; gap: 7px; font-size: .88rem; color: var(--gray-3); cursor: pointer; padding: 7px 14px; border: 1.5px solid #ddd; border-radius: 8px; transition: all .2s; }
+    .tipo-option:has(input:checked) { border-color: var(--blue); background: #EBF3FB; color: var(--blue); font-weight: 600; }
+    .tipo-option input[type="checkbox"] { accent-color: var(--blue); width: 15px; height: 15px; cursor: pointer; }
+    .pcd-option { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--gray-3); cursor: pointer; margin-top: 4px; }
+    .pcd-option input[type="checkbox"] { accent-color: var(--blue); width: 15px; height: 15px; cursor: pointer; }
 
     /* ── CHIPS DE CARGO ── */
     .cargo-section { margin-bottom: 10px; }
@@ -535,17 +541,32 @@
           </div>
           <div class="form-group">
             <label for="location">Cidade / Estado</label>
-            <input type="text" id="location" name="location" placeholder="Ex: São Paulo, Campinas..." />
-            <span class="form-hint">Deixe em branco ou selecione Remoto para buscar em todo o Brasil.</span>
+            <input type="text" id="location" name="location" placeholder="Ex: Campinas, Indaiatuba..." />
+            <span class="form-hint">Informe sua cidade. Para vagas remotas, a busca é feita em todo o Brasil automaticamente.</span>
           </div>
-          <div class="form-group">
-            <label for="tipo_trabalho">Tipo de trabalho</label>
-            <select id="tipo_trabalho" name="tipo_trabalho">
-              <option value="todos">Qualquer tipo</option>
-              <option value="remoto">Remoto (busca em todo o Brasil)</option>
-              <option value="hibrido">Híbrido</option>
-              <option value="presencial">Presencial</option>
-            </select>
+          <div class="form-group full">
+            <label>Tipo de trabalho</label>
+            <div class="tipo-checkboxes">
+              <label class="tipo-option"><input type="checkbox" name="tipo_trabalho" value="presencial" id="tipo-presencial"> Presencial</label>
+              <label class="tipo-option"><input type="checkbox" name="tipo_trabalho" value="hibrido" id="tipo-hibrido"> Híbrido</label>
+              <label class="tipo-option"><input type="checkbox" name="tipo_trabalho" value="remoto" id="tipo-remoto"> Remoto <small style="font-weight:400">(todo o Brasil)</small></label>
+            </div>
+            <div id="raio-group" style="display:none; margin-top:12px;">
+              <label for="raio_km" style="font-size:.85rem;">Raio de busca presencial / híbrido</label>
+              <select id="raio_km" name="raio_km" style="margin-top:6px;">
+                <option value="0">Apenas na cidade informada</option>
+                <option value="25">+ 25 km ao redor</option>
+                <option value="50">+ 50 km ao redor</option>
+                <option value="100">+ 100 km ao redor</option>
+              </select>
+            </div>
+            <span class="form-error" id="err-tipo">Selecione pelo menos um tipo de trabalho.</span>
+          </div>
+          <div class="form-group full">
+            <label class="pcd-option">
+              <input type="checkbox" id="aceita_pcd" name="aceita_pcd">
+              Aceito receber vagas exclusivas para PCD (Pessoa com Deficiência)
+            </label>
           </div>
           <div class="form-group full">
             <label>Pacote de créditos *</label>
@@ -677,6 +698,16 @@
     outroInput.addEventListener('input', sync);
   })();
 
+  // ── RAIO DE BUSCA — mostra apenas quando presencial ou híbrido estiver marcado ──
+  (function () {
+    function atualizarRaio() {
+      const presencial = document.getElementById('tipo-presencial').checked;
+      const hibrido    = document.getElementById('tipo-hibrido').checked;
+      document.getElementById('raio-group').style.display = (presencial || hibrido) ? 'block' : 'none';
+    }
+    document.querySelectorAll('input[name="tipo_trabalho"]').forEach(cb => cb.addEventListener('change', atualizarRaio));
+  })();
+
   // ── SELECIONAR PLANO PELO BOTÃO DOS CARDS ──
   function selecionarPlano(plano) {
     const radio = document.querySelector(`input[name="plano"][value="${plano}"]`);
@@ -722,7 +753,10 @@
     const whatsapp = document.getElementById('whatsapp').value.replace(/\D/g, '');
     const keywords = document.getElementById('keywords').value.trim();
     const location = document.getElementById('location').value.trim();
-    const tipo     = document.getElementById('tipo_trabalho').value;
+    const tipos    = Array.from(document.querySelectorAll('input[name="tipo_trabalho"]:checked')).map(c => c.value);
+    const tipo     = tipos.length > 0 ? tipos.join(',') : 'todos';
+    const raio_km  = parseInt(document.getElementById('raio_km').value) || 0;
+    const aceita_pcd = document.getElementById('aceita_pcd').checked;
     const plano    = document.querySelector('input[name="plano"]:checked')?.value;
 
     // Validação
@@ -745,6 +779,8 @@
       whatsapp: '55' + whatsapp,
       keywords, location,
       tipo_trabalho: tipo,
+      raio_km,
+      aceita_pcd,
       plano,
     };
 
