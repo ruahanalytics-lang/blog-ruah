@@ -542,7 +542,8 @@
           <div class="form-group">
             <label for="location">Cidade / Estado</label>
             <input type="text" id="location" name="location" placeholder="Ex: Campinas, Indaiatuba..." />
-            <span class="form-hint">Informe sua cidade. Para vagas remotas, a busca é feita em todo o Brasil automaticamente.</span>
+            <span class="form-hint">Informe sua cidade para vagas presenciais/híbridas. Para remoto, a busca cobre todo o Brasil automaticamente.</span>
+            <span class="form-error" id="err-location">Informe sua cidade para busca presencial ou híbrida.</span>
           </div>
           <div class="form-group full">
             <label>Tipo de trabalho</label>
@@ -763,10 +764,14 @@
     let ok = true;
     const show = (id, visible) => { document.getElementById(id).style.display = visible ? 'block' : 'none'; };
 
+    const precisaCidade = tipos.some(t => t === 'presencial' || t === 'hibrido');
+    const errLocation   = document.getElementById('err-location');
+
     show('err-nome',     !nome);                              if (!nome)                          ok = false;
     show('err-email',    !email || !email.includes('@'));      if (!email || !email.includes('@')) ok = false;
     show('err-whatsapp', whatsapp.length < 10);               if (whatsapp.length < 10)           ok = false;
     show('err-keywords', !keywords);                          if (!keywords)                      ok = false;
+    if (errLocation) { show('err-location', precisaCidade && !location); if (precisaCidade && !location) ok = false; }
 
     if (!ok) return;
 
